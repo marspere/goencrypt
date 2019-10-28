@@ -18,14 +18,19 @@ $ cat example.go
 ```
 package main
 
-import "github.com/marspere/goencrypt/md5"
+import (
+	"fmt"
+
+	"github.com/marspere/goencrypt"
+)
 
 func main() {
-	value, err := md5.MD5("hello world")
+	value, err := goencrypt.MD5("hello world")
 	if err != nil {
-	    fmt.Println(err)
+		fmt.Println(err)
+		return
 	}
-	fmt.Println(value.Value)
+	fmt.Println(value)
 	// output: 5eb63bbbe01eeed093cb22bb8f5acdc3
 }
 ```
@@ -46,7 +51,7 @@ It is a widely used cryptographic hash function that produces a hash value to en
 ```
 func main() {	
     // The return value is 32-bit lowercase.
-    value, err := md5.MD5("hello world")
+    value, err := goencrypt.MD5("hello world")
     fmt.Println(value.Value)
     
     // UpperCase32 return 32-bit uppercase value.
@@ -69,7 +74,7 @@ RSA encryption limits the length of plaintext, and specifies the maximum length 
 
 ```
 func main() {
-    cipher := rsa.New(format.PrintBase64, defaultPublicFile, defaultPrivateFile)
+    cipher := goencrypt.NewRSACipher(format.PrintBase64, defaultPublicFile, defaultPrivateFile)
 	cipherText, err := cipher.RSAEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -89,7 +94,7 @@ AES block length is fixed at 128 bits, the key length can be 128, 192 or 256 bit
 
 ```
 func main() {
-    cipher := aes.New([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
+    cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
 	cipherText, err := cipher.AESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -105,7 +110,7 @@ func main() {
 
 ```
 func main() {
-    cipher := des.New([]byte("12345678"), []byte(""), mode.ECBMode, mode.Pkcs5, format.PrintBase64)
+    cipher := goencrypt.NewDESCipher([]byte("12345678"), []byte(""), mode.ECBMode, mode.Pkcs5, format.PrintBase64)
     cipherText, err := cipher.DESEncrypt([]byte("hello world"))
     if err != nil {
     	fmt.Println(err)
@@ -121,7 +126,7 @@ func main() {
 
 ```gotemplate
 func main() {
-	cipher := des.New([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
+	cipher := goencrypt.NewDESCipher([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
 	cipherText, err := cipher.TripleDESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
