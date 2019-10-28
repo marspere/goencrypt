@@ -1,6 +1,6 @@
 # goencrypt
 
-Go实现的各种加密算法，包括对称密码（DES、3DES、AES）、非对称密码（DH、RSA）等
+Goencrypt is a library written in pure Go providing a set of encryption algorithms, which including symmetric ciphers(DES, 3DES, AES), asymmetric ciphers (RSA), etc.
 
 ## Quick Start
 
@@ -132,3 +132,11 @@ func main() {
 ```
 
 ![](image/triple_des_encrypt.png)
+
+## Contributing
+
+If you’d like to propose a change please ensure the following:
+
+- All existing tests are passing.
+- There are tests in the test suite that cover the changes you’re making.
+- You have added documentation strings (in English) to (at least) the public functions you’ve added or modified.
