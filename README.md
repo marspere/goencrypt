@@ -74,7 +74,7 @@ RSA encryption limits the length of plaintext, and specifies the maximum length 
 
 ```
 func main() {
-    cipher := goencrypt.NewRSACipher(format.PrintBase64, defaultPublicFile, defaultPrivateFile)
+    cipher := goencrypt.NewRSACipher(goencrypt.PrintBase64, defaultPublicFile, defaultPrivateFile)
 	cipherText, err := cipher.RSAEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -94,7 +94,7 @@ AES block length is fixed at 128 bits, the key length can be 128, 192 or 256 bit
 
 ```
 func main() {
-    cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
+    cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), goencrypt.CBCMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
 	cipherText, err := cipher.AESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -110,7 +110,7 @@ func main() {
 
 ```
 func main() {
-    cipher := goencrypt.NewDESCipher([]byte("12345678"), []byte(""), mode.ECBMode, mode.Pkcs5, format.PrintBase64)
+    cipher := goencrypt.NewDESCipher([]byte("12345678"), []byte(""), goencrypt.ECBMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
     cipherText, err := cipher.DESEncrypt([]byte("hello world"))
     if err != nil {
     	fmt.Println(err)
@@ -126,7 +126,7 @@ func main() {
 
 ```gotemplate
 func main() {
-	cipher := goencrypt.NewDESCipher([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), mode.CBCMode, mode.Pkcs5, format.PrintBase64)
+	cipher := goencrypt.NewDESCipher([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), goencrypt.CBCMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
 	cipherText, err := cipher.TripleDESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
