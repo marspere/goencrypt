@@ -80,3 +80,12 @@ func ExampleTripleDESEncryptAndDecrypt() {
 	}
 	fmt.Println(plainText)
 }
+
+func ExampleSHA() {
+	result, err := SHA(SHA1, []byte("hello world"))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(result)
+}

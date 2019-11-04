@@ -72,9 +72,9 @@ RSA encryption algorithm is an asymmetric encryption algorithm. RSA is also a pa
 
 RSA encryption limits the length of plaintext, and specifies the maximum length of plaintext to be encrypted = len(key) - 11.
 
-```
+```gotemplate
 func main() {
-    cipher := goencrypt.NewRSACipher(goencrypt.PrintBase64, defaultPublicFile, defaultPrivateFile)
+	cipher := goencrypt.NewRSACipher(goencrypt.PrintBase64, defaultPublicFile, defaultPrivateFile)
 	cipherText, err := cipher.RSAEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -92,9 +92,9 @@ AES, Advanced Encryption Standard, also known as Rijndael encryption in cryptogr
 
 AES block length is fixed at 128 bits, the key length can be 128, 192 or 256 bits. It including AES-ECB,AES-CBC,AES-CTR,AES-OFB,AES-CFB.
 
-```
+```gotemplate
 func main() {
-    cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), goencrypt.CBCMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
+	cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), goencrypt.CBCMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
 	cipherText, err := cipher.AESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -108,15 +108,15 @@ func main() {
 
 ### DES Algorithm
 
-```
+```gotemplate
 func main() {
-    cipher := goencrypt.NewDESCipher([]byte("12345678"), []byte(""), goencrypt.ECBMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
-    cipherText, err := cipher.DESEncrypt([]byte("hello world"))
-    if err != nil {
-    	fmt.Println(err)
-    	return
-    }
-    fmt.Println(cipherText)
+	cipher := goencrypt.NewDESCipher([]byte("12345678"), []byte(""), goencrypt.ECBMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
+	cipherText, err := cipher.DESEncrypt([]byte("hello world"))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(cipherText)
 }
 ```
 
@@ -137,6 +137,21 @@ func main() {
 ```
 
 ![](image/triple_des_encrypt.png)
+
+### Secure Hash Algorithm
+
+```gotemplate
+func main() {
+	result, err := goencrypt.SHA(goencrypt.SHA1, []byte("hello world"))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(result)
+}
+```
+
+![](image/sha1.png)
 
 ## Contributing
 
