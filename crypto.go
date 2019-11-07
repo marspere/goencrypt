@@ -67,17 +67,15 @@ func (c *Cipher) Decode(cipherText string) ([]byte, error) {
 }
 
 func (c *Cipher) Fill(plainText []byte, blockSize int) []byte {
-	if c.FillMode == Pkcs5 {
-		return c.FillMode.pkcs5Padding(plainText)
-	} else if c.FillMode == Pkcs7 {
-		return c.FillMode.pkcs7Padding(plainText, blockSize)
-	} else {
+	if c.FillMode == PkcsZero {
 		return c.FillMode.zeroPadding(plainText, blockSize)
+	} else {
+		return c.FillMode.pkcs7Padding(plainText, blockSize)
 	}
 }
 
 func (c *Cipher) UnFill(plainText []byte) ([]byte, error) {
-	if c.FillMode == Pkcs5 || c.FillMode == Pkcs7 {
+	if c.FillMode == Pkcs7 {
 		return c.FillMode.pkcsUnPadding(plainText), nil
 	} else if c.FillMode == PkcsZero {
 		return c.FillMode.unZeroPadding(plainText), nil

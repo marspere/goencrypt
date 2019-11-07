@@ -3,22 +3,30 @@ package goencrypt
 import (
 	"crypto/aes"
 	"errors"
+	"strconv"
 )
 
 type CipherAES struct {
 	Cipher
 }
 
-func NewAESCipher(key, iv []byte, groupMode int, fillMode FillMode, decodeType int) *CipherAES {
-	return &CipherAES{
-		Cipher{
-			GroupMode:  groupMode,
-			FillMode:   fillMode,
-			DecodeType: decodeType,
-			Key:        key,
-			Iv:         iv,
-		},
+const BlockSize = 16
+
+func NewAESCipher(key, iv []byte, groupMode int, fillMode FillMode, decodeType int) (*CipherAES, error) {
+	if len(iv) != BlockSize {
+		return nil, errors.New("IV length must equal block size")
 	}
+	if len(key) != 16 && len(key) != 24 && len(key) != 32 {
+		return nil, errors.New("crypto/aes: invalid key size " + strconv.Itoa(len(key)))
+	}
+	return &CipherAES{Cipher{
+		GroupMode:  groupMode,
+		FillMode:   fillMode,
+		DecodeType: decodeType,
+		Key:        key,
+		Iv:         iv,
+	},
+	}, nil
 }
 
 func (c *CipherAES) AESEncrypt(plainText []byte) (cipherText string, err error) {

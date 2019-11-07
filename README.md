@@ -94,7 +94,11 @@ AES block length is fixed at 128 bits, the key length can be 128, 192 or 256 bit
 
 ```gotemplate
 func main() {
-	cipher := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), goencrypt.CBCMode, goencrypt.Pkcs5, goencrypt.PrintBase64)
+	cipher, err := goencrypt.NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), goencrypt.CBCMode, goencrypt.Pkcs7, goencrypt.PrintBase64)
+	if err != nil {
+    	fmt.Println(err)
+    	return
+    }
 	cipherText, err := cipher.AESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
