@@ -35,7 +35,7 @@ func (c *CipherDES) TripleDESDecrypt(cipherText string) (plainText string, err e
 	}
 	plainData, err := c.UnFill(c.Output)
 	if err != nil {
-		return
+		return "", handleError(err)
 	}
 	return string(plainData), nil
 }

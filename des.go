@@ -51,7 +51,7 @@ func (c *CipherDES) DESDecrypt(cipherText string) (plainText string, err error) 
 	}
 	plainData, err := c.UnFill(c.Output)
 	if err != nil {
-		return
+		return "", handleError(err)
 	}
 	return string(plainData), nil
 }

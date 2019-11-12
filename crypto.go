@@ -3,6 +3,7 @@ package goencrypt
 import (
 	"crypto/cipher"
 	"errors"
+	"fmt"
 )
 
 type Crypto interface {
@@ -74,7 +75,16 @@ func (c *Cipher) Fill(plainText []byte, blockSize int) []byte {
 	}
 }
 
-func (c *Cipher) UnFill(plainText []byte) ([]byte, error) {
+func (c *Cipher) UnFill(plainText []byte) (data []byte, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			var ok bool
+			err, ok = r.(error)
+			if !ok {
+				err = fmt.Errorf("%v", r)
+			}
+		}
+	}()
 	if c.FillMode == Pkcs7 {
 		return c.FillMode.pkcsUnPadding(plainText), nil
 	} else if c.FillMode == PkcsZero {
