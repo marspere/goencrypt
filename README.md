@@ -7,7 +7,7 @@ Goencrypt is a library written in pure Go providing a set of encryption algorith
 Download and install
 
 ```bash
-go get github.com/marspere/goencrypt@v1.0.6
+go get github.com/marspere/goencrypt@v1.0.7
 ```
 
 ```bash
