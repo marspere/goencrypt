@@ -7,7 +7,7 @@ Goencrypt is a library written in pure Go providing a set of encryption algorith
 Download and install
 
 ```bash
-go get github.com/marspere/goencrypt
+go get github.com/marspere/goencrypt@v1.0.6
 ```
 
 ```bash
@@ -146,7 +146,7 @@ func main() {
 
 ```gotemplate
 func main() {
-	result, err := goencrypt.SHA(goencrypt.SHA1, []byte("hello world"))
+	result, err := goencrypt.SHA(goencrypt.SHA1, []byte("hello world"), goencrypt.PrintHex)
 	if err != nil {
 		fmt.Println(err)
 		return

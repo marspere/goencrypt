@@ -26,7 +26,11 @@ func ExampleRSAEncryptAndDecrypt() {
 
 func ExampleAESEncryptAndDecrypt() {
 	// aes decryption
-	cipher := NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), CBCMode, Pkcs5, PrintBase64)
+	cipher, err := NewAESCipher([]byte("0123456789asdfgh"), []byte("0123456789asdfgh"), CBCMode, Pkcs7, PrintBase64)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	cipherText, err := cipher.AESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -45,7 +49,7 @@ func ExampleAESEncryptAndDecrypt() {
 
 func ExampleDESEncryptAndDecrypt() {
 	// des encryption
-	cipher := NewDESCipher([]byte("12345678"), []byte(""), ECBMode, Pkcs5, PrintBase64)
+	cipher := NewDESCipher([]byte("12345678"), []byte(""), ECBMode, Pkcs7, PrintBase64)
 	cipherText, err := cipher.DESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -64,7 +68,7 @@ func ExampleDESEncryptAndDecrypt() {
 
 func ExampleTripleDESEncryptAndDecrypt() {
 	// triple des encryption
-	cipher := NewDESCipher([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), CBCMode, Pkcs5, PrintBase64)
+	cipher := NewDESCipher([]byte("12345678abcdefghijklmnop"), []byte("abcdefgh"), CBCMode, Pkcs7, PrintBase64)
 	cipherText, err := cipher.TripleDESEncrypt([]byte("hello world"))
 	if err != nil {
 		fmt.Println(err)
@@ -82,7 +86,7 @@ func ExampleTripleDESEncryptAndDecrypt() {
 }
 
 func ExampleSHA() {
-	result, err := SHA(SHA1, []byte("hello world"))
+	result, err := SHA(SHA1, []byte("hello world"), PrintHex)
 	if err != nil {
 		fmt.Println(err)
 		return

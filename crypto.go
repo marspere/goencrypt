@@ -48,6 +48,7 @@ func (c *Cipher) Decrypt(block cipher.Block, cipherData []byte) (err error) {
 	return
 }
 
+// Encode
 // default print format is base64
 func (c *Cipher) Encode() string {
 	if c.DecodeType == PrintHex {
